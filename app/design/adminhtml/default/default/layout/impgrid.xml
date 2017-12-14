@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_catalog_product_index>
+        <reference name="head">
+            <action method="addJs"><script>varien/form.js</script></action>
+            <action method="addJs"><file>vti/impgrid/attribute.js</file></action>
+            <action method="addJs"><file>vti/impgrid/chosen/chosen.proto.js</file></action>
+            <action method="addJs"><file>vti/impgrid/event.simulate.js</file></action>
+
+            <action method="addJs"><file>scriptaculous/controls.js</file></action>
+            <action method="addCss"><name>vti/impgrid/popup.css</name></action>
+
+            <action method="addItem"><type>js</type><name>mage/adminhtml/tabs.js</name></action>
+
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/default.css</name></action>
+            <action method="addItem"><type>js_css</type><name>prototype/windows/themes/magento.css</name></action>
+
+            <action method="addItem"><type>js_css</type><name>vti/impgrid/chosen/chosen.css</name><params/></action>
+        </reference>
+        <reference name="content">
+            <block type="impgrid/adminhtml_catalog_product_grid_jsinit" name="impgrid_jsinit"/>
+        </reference>
+        <reference name="products_list">
+            <block type="impgrid/adminhtml_catalog_product_grid_jsinit" name="impgrid_jsinit" />
+        </reference>
+    </adminhtml_catalog_product_index>
+</layout>

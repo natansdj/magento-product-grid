@@ -1,0 +1,102 @@
+.impgrid-content-header {
+    margin-bottom: 18px;
+    border-bottom: 4px solid #dfdfdf;
+    padding-bottom: .25em;
+    height: 40px;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+div.impgrid-side-col {
+    float: left;
+    width: 180px;
+    margin-right: -180px;
+    padding-bottom: 25px;
+}
+
+div.impgrid-main-col {
+    margin-left: 180px;
+    min-height: 450px;
+    padding: 0 5px 25px 25px;
+}
+
+.impgrid-content-buttons {
+    margin-bottom: 5px;
+    float: right;
+    display: inline;
+    white-space: nowrap;
+}
+
+.impgrid-attribute-select {
+    width: 220px;
+}
+
+.impgrid-column-table thead {
+}
+
+.impgrid-autocomplete {
+    z-index: 10000;
+    position: absolute;
+    width: 250px;
+    max-height: 500px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #888;
+    margin: 0;
+    padding: 0;
+}
+
+.impgrid-autocomplete li:hover {
+    background-color: #dcebf0;
+    cursor: default;
+}
+
+.columns-group {
+    margin: 15px 5px;
+}
+
+.im-delete-attribute {
+    display: block;
+    width: 15px;
+    height: 15px;
+    background: url(../../images/impgrid/delete.gif) 100% 2px no-repeat;
+    opacity: 0.85;
+}
+
+.im-delete-attribute:hover {
+    cursor: pointer;
+    opacity: 1.0;
+}
+
+#attributes-select {
+    display: none;
+}
+
+.custom-title {
+    height: 20px;
+}
+
+#impgrid-delete-template_table_content {
+    background-color: whitesmoke;
+}
+
+#impgrid-delete-template_content .delete-group-button {
+    margin: 0 25px;
+}
+
+.impgrid-main-col td, .impgrid-main-col th {
+    vertical-align: middle;
+}
+
+.impgrid-main-col input, div.chosen-container {
+    width: 96%;
+    margin: 0 2px;
+}
+
+.impgrid-main-col {
+    font: 12px/1.5em Arial, Helvetica, sans-serif !important;
+}
+
+.impgrid-main-col input {
+    font: 12px/1.5em Arial, Helvetica, sans-serif !important;
+}

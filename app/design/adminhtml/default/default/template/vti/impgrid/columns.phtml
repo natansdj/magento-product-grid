@@ -1,0 +1,154 @@
+<?php
+/**
+ * @var VTI_Pgrid_Block_Adminhtml_Catalog_Product_Grid_Attributes $this
+ */
+?>
+<!--<div id="attributes-select">-->
+<!--    <select data-placeholder="Choose an Attribute..." class="impgrid-attribute-select chosen-select">-->
+<!--        --><?php
+//        /**
+//         * @var Mage_Catalog_Model_Resource_Eav_Attribute $attribute
+//         */
+//        ?>
+<!--        <option value="0"></option>-->
+<!--        --><?php //foreach ($this->getAttributes() as $attribute): ?>
+<!--            <option-->
+<!--                    data-attribute="--><?php //echo $attribute->getAttributeCode(); ?><!--"-->
+<!--                    value="--><?php //echo $attribute->getAttributeId() ?><!--">-->
+<!--                --><?php //echo $attribute->getFrontendLabel(); ?>
+<!--                (--><?php //echo $attribute->getAttributeCode(); ?><!--)-->
+<!--            </option>-->
+<!--        --><?php //endforeach; ?>
+<!--    </select>-->
+<!--</div>-->
+<div class="impgrid-side-col" id="page::left">
+    <ul class="tabs" id="impgrid-columns-tab">
+        <li class="first"><a href="#" class="tab-item-link" id="column_tabs_standard"><span>Standard Columns</span></a>
+        </li>
+        <li><a href="#" class="tab-item-link" id="column_tabs_attribute"><span>Attribute Columns</span></a></li>
+    </ul>
+</div>
+<div class="impgrid-main-col" id="content">
+
+    <div class="impgrid-content-header">
+        <div class="content-buttons-placeholder">
+            <p class="impgrid-content-buttons form-buttons">
+                <button style="" class="scalable check check-all" type="button"
+                        onclick="pAttribute.CheckAll()">
+                    <span><?php echo $this->__('Check All'); ?></span></button>
+                <button style="" class="scalable check uncheck-all" type="button"
+                        onclick="pAttribute.unCheckAll()">
+                    <span><?php echo $this->__('Uncheck All'); ?></span></button>
+                <button style="" class="scalable save" id="save-group" type="submit"
+                        onclick="pAttribute.disableSave();pAttributeForm.submit()">
+                    <span><?php echo $this->__('Apply'); ?></span></button>
+                <button style="" class="scalable cancel" type="button" onclick="javascript: pAttribute.closeConfig();">
+                    <span><?php echo $this->__('Cancel'); ?></span></button>
+            </p>
+        </div>
+    </div>
+
+    <form id="form-pattribute" name="form-pattribute" action="<?php echo $this->getSaveUrl(); ?>" method="post">
+        <input type="hidden" id="group-name" name="group-name"/>
+        <input type="hidden" value="0" name="preset" id="preset"/>
+        <input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>"/>
+        <input type="hidden" name="attributesKey" id="attributesKey" value="<?php echo $this->getAttributesKey(); ?>"/>
+
+        <div id="column_tabs_standard_content" class="grid">
+            <table id="standard-columns-table" cellspacing="3px">
+                <thead>
+                <tr>
+                    <th width="60px"><?php echo $this->__('Visible'); ?></th>
+                    <th width="100px"><?php echo $this->__('Column'); ?></th>
+                    <th width="200px"><?php echo $this->__('Title'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($this->getStandardColumns() as $column): ?>
+                    <?php /**
+                     * @var VTI_Pgrid_Model_Column $column
+                     */ ?>
+                    <tr>
+                        <td>
+                            <input type="hidden" name="column[<?php echo $column->getId() ?>][group_column_id]"
+                                   value="<?php echo $column->getGroupColumnId() ?>"/>
+
+                            <input type="hidden" name="column[<?php echo $column->getId() ?>][is_visible]" value="0"/>
+                            <input type="checkbox" name="column[<?php echo $column->getId() ?>][is_visible]" value="1"
+                                <?php echo $column->isVisible() ? "checked='checked'" : ''; ?> />
+                        </td>
+                        <td>
+                            <span class="label"><?php echo $column->getTitle(); ?></span>
+                        </td>
+                        <td>
+                            <input type="text"
+                                   class="custom-title"
+                                   name="column[<?php echo $column->getId() ?>][custom_title]"
+                                   value="<?php echo $column->getCustomTitle()
+                                       ? $column->getCustomTitle()
+                                       : $column->getTitle(); ?>"
+                            />
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+        <div id="column_tabs_attribute_content" class="grid" style="display: none;">
+            <div id="attributes-select">
+                <select data-placeholder="Choose a Attribute..." class="impgrid-attribute-select chosen-select">
+                    <?php
+                    /**
+                     * @var Mage_Catalog_Model_Resource_Eav_Attribute $attribute
+                     */
+                    ?>
+                    <option value="0"></option>
+                    <?php foreach ($this->getAttributes() as $attribute): ?>
+                        <option value="<?php echo $attribute->getAttributeId() ?>"><?php echo $attribute->getFrontendLabel(); ?>
+                            (<?php echo $attribute->getAttributeCode(); ?>)
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <table id="attribute-columns-table" cellspacing="3px">
+                <thead>
+                <tr>
+                    <th width="250px"><?php echo $this->__('Attribute'); ?></th>
+                    <th width="200px"><?php echo $this->__('Title'); ?></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--Adding attributes with js-->
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript">
+    decorateTable('standard-columns-table');
+    var tabs = new varienTabs('impgrid-columns-tab', 'form-pattribute', 'column_tabs_attribute', []);
+    tabs.showTabContent($('column_tabs_standard'));
+    pAttributeForm = new VarienForm('form-pattribute');
+    var attributeColumns = <?php echo json_encode($this->getAttributeColumns()->getData()); ?>;
+    pAttribute.initializeTrGrid(attributeColumns);
+
+    //Custom observer for varienTab click event
+    var impgridColTabs = $$('#impgrid-columns-tab li a.tab-item-link');
+    for (var i = 0; i < impgridColTabs.length; i++) {
+        Event.observe(impgridColTabs[i], 'click', function (event) {
+            var tab = Event.findElement(event, 'a');
+            var checkBtn = $$('.impgrid-content-buttons button.check');
+
+            checkBtn.each(function (obj) {
+                if (tab.id === 'column_tabs_attribute') {
+                    obj.hide();
+                } else {
+                    obj.show();
+                }
+            });
+
+            Event.stop(event);
+        });
+    }
+</script>

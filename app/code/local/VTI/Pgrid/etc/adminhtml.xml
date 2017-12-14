@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <products>
+                                <children>
+                                    <impgrid translate="title" module="impgrid">
+                                        <title>Managed Product Grid Column</title>
+                                        <sort_order>400</sort_order>
+                                    </impgrid>
+                                </children>
+                            </products>
+                        </children>
+                    </catalog>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <impgrid translate="title" module="impgrid">
+                                        <title>Managed Product Grid Column</title>
+                                    </impgrid>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

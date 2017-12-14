@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <VTI_Pgrid>
+            <active>true</active>
+            <codePool>local</codePool>
+        </VTI_Pgrid>
+    </modules>
+</config>
